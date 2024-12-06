@@ -6,6 +6,7 @@ import domain.Session;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class SessionRepository {
     private final List<Session> sessions;
@@ -29,9 +30,10 @@ public class SessionRepository {
         saveSessions();
     }
 
-    public int getLastSessionId() {
-        if (sessions.isEmpty()) return 0;
-        return sessions.get(sessions.size() - 1).getSessionId();
+    public List<Session> getSessionsForAttendee(int attendeeId) {
+        return sessions.stream()
+                .filter(session -> session.getAttendees().contains(attendeeId))
+                .collect(Collectors.toList());
     }
 
     public List<Session> getAllSessions() {

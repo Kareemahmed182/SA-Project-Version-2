@@ -1,0 +1,17 @@
+[ {
+  "username" : "kareem ahmed",
+  "password" : "12345",
+  "role" : "ATTENDEE"
+}, {
+  "username" : "admin",
+  "password" : "12345",
+  "role" : "ADMIN"
+}, {
+  "username" : "speaker_1",
+  "password" : "hashed_speaker_password",
+  "role" : "SPEAKER"
+}, {
+  "username" : "kareem ahmed ",
+  "password" : "12345",
+  "role" : "ATTENDEE"
+} ]

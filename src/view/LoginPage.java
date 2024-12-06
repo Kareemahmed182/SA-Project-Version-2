@@ -2,22 +2,21 @@ package view;
 
 import controller.ConferenceManager;
 import domain.User;
+import dto.AttendeeDTO;
 import enums.Role;
 import repositories.UserRepository;
+import repositories.AttendeeRepository;
+import repositories.SessionRepository;
+import repositories.FeedbackRepository;
 import service.AttendeeService;
 import service.CertificateService;
 import service.FeedbackService;
 import service.SessionService;
 
-import repositories.AttendeeRepository;
-import repositories.SessionRepository;
-import repositories.FeedbackRepository;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 
 public class LoginPage extends JFrame {
     private final JTextField usernameField;
@@ -91,7 +90,9 @@ public class LoginPage extends JFrame {
             if (user.getRole() == Role.ADMIN) {
                 new AdminHomePage(manager);
             } else if (user.getRole() == Role.ATTENDEE) {
-                new AttendeeHomePage(manager);
+                // Create AttendeeDTO for the logged-in user
+                AttendeeDTO attendeeDTO = new AttendeeDTO(1, user.getUsername(), "attendee@example.com");
+                new AttendeeHomePage(manager, attendeeDTO);
             } else if (user.getRole() == Role.SPEAKER) {
                 new SpeakerHomePage(manager);
             }

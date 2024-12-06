@@ -33,7 +33,14 @@ public class SessionService {
         sessionRepository.addAttendeeToSession(sessionId, attendeeId);
     }
 
-    public int getLastSessionId() {
-        return sessionRepository.getLastSessionId();
+    public List<SessionDTO> getRegisteredSessionsForAttendee(int attendeeId) {
+        return sessionRepository.getSessionsForAttendee(attendeeId).stream()
+                .map(session -> new SessionDTO(
+                        String.valueOf(session.getSessionId()),
+                        session.getName(),
+                        session.getSpeaker(),
+                        session.getRoom(),
+                        session.getDateTime()))
+                .collect(Collectors.toList());
     }
 }

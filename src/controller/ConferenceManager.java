@@ -1,13 +1,12 @@
 package controller;
 
-import dto.AttendeeDTO;
 import dto.SessionDTO;
-import service.AttendeeService;
+import dto.AttendeeDTO;
 import service.CertificateService;
 import service.FeedbackService;
 import service.SessionService;
+import service.AttendeeService;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 public class ConferenceManager {
@@ -23,37 +22,32 @@ public class ConferenceManager {
         this.certificateService = certificateService;
     }
 
+    // Register a new attendee
     public AttendeeDTO registerAttendee(String name, String email) {
         return attendeeService.registerAttendee(name, email);
     }
 
-    public List<AttendeeDTO> getAllAttendees() {
-        return attendeeService.getAllAttendees();
-    }
-
+    // Retrieve all sessions
     public List<SessionDTO> getAllSessions() {
         return sessionService.getAllSessions();
     }
 
-    public SessionDTO createSession(String name, String speaker, LocalDateTime dateTime, String room) {
-        sessionService.createSession(name, speaker, dateTime, room);
-        return new SessionDTO(
-                String.valueOf(sessionService.getLastSessionId()), // Add this in service if necessary
-                name,
-                speaker,
-                room,
-                dateTime
-        );
-    }
-
+    // Register an attendee for a session
     public void registerForSession(int sessionId, int attendeeId) {
         sessionService.registerAttendeeForSession(sessionId, attendeeId);
     }
 
+    // Retrieve registered sessions for an attendee
+    public List<SessionDTO> getRegisteredSessionsForAttendee(int attendeeId) {
+        return sessionService.getRegisteredSessionsForAttendee(attendeeId);
+    }
+
+    // Submit feedback for a session
     public void submitFeedback(int attendeeId, String comments, int rating) {
         feedbackService.submitFeedback(attendeeId, comments, rating);
     }
 
+    // Generate a certificate
     public String generateCertificate(int attendeeId, String conferenceName) {
         return certificateService.generateCertificate(attendeeId, conferenceName);
     }

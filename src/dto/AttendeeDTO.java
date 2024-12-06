@@ -1,5 +1,6 @@
 package dto;
 
+
 public class AttendeeDTO {
     private final int id;
     private final String name;
