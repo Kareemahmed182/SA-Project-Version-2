@@ -1,7 +1,7 @@
-package data;
+package data_handlers;
 
 public class FilePaths {
-    private static final String BASE_DIR = System.getProperty("user.dir") + "/data";
+    private static final String BASE_DIR = System.getProperty("user.dir") + "/data_handlers";
 
     public static final String USERS_FILE = BASE_DIR + "/users.json";
     public static final String ATTENDEES_FILE = BASE_DIR + "/attendees.json";

@@ -1,6 +1,6 @@
 package repositories;
 
-import data.AttendeeDataHandler;
+import data_handlers.AttendeeDataHandler;
 import domain.Attendee;
 import dto.AttendeeDTO;
 

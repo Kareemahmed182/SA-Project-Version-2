@@ -1,4 +1,4 @@
-package data;
+package data_handlers;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import domain.Feedback;
@@ -6,7 +6,7 @@ import domain.Feedback;
 import java.util.List;
 
 public class FeedbackDataHandler {
-    private static final String FILE_PATH = "data/feedback.json";
+    private static final String FILE_PATH = "data_handlers/feedback.json";
     private static final DataHandler<Feedback> dataHandler = new DataHandler<>(FILE_PATH);
 
     public static List<Feedback> loadFeedback() {

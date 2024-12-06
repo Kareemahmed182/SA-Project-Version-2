@@ -3,19 +3,21 @@ package view;
 import controller.ConferenceManager;
 import domain.User;
 import enums.Role;
-import repositories.AttendeeRepository;
-import repositories.FeedbackRepository;
-import repositories.SessionRepository;
 import repositories.UserRepository;
 import service.AttendeeService;
 import service.CertificateService;
 import service.FeedbackService;
 import service.SessionService;
 
+import repositories.AttendeeRepository;
+import repositories.SessionRepository;
+import repositories.FeedbackRepository;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 
 public class LoginPage extends JFrame {
     private final JTextField usernameField;

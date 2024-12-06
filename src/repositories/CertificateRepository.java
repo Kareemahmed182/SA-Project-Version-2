@@ -1,6 +1,6 @@
 package repositories;
 
-import data.CertificateDataHandler;
+import data_handlers.CertificateDataHandler;
 import domain.Certificate;
 
 import java.util.ArrayList;

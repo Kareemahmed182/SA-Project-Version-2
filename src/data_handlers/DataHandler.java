@@ -1,4 +1,4 @@
-package data;
+package data_handlers;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -18,7 +18,7 @@ public class DataHandler<T> {
         this.objectMapper = new ObjectMapper();
         this.objectMapper.registerModule(new JavaTimeModule()); // Handle Java 8+ time types
         this.objectMapper.enable(SerializationFeature.INDENT_OUTPUT); // Pretty-print JSON
-        ensureFileExists();
+        ensureFileExists(); // Ensure the file exists when the program starts
     }
 
     public List<T> readData(TypeReference<List<T>> typeReference) {
@@ -36,11 +36,14 @@ public class DataHandler<T> {
 
     public void writeData(List<T> data) {
         try {
-            objectMapper.writeValue(new File(filePath), data);
+            System.out.println("Writing data to " + filePath);
+            objectMapper.writeValue(new File(filePath), data); // Write the data to the file
+            System.out.println("Data written successfully.");
         } catch (IOException e) {
             System.err.println("Error writing data to " + filePath + ": " + e.getMessage());
         }
     }
+
 
     private void ensureFileExists() {
         try {

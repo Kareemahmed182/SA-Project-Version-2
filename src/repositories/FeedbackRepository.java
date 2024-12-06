@@ -1,6 +1,6 @@
 package repositories;
 
-import data.FeedbackDataHandler;
+import data_handlers.FeedbackDataHandler;
 import domain.Feedback;
 
 import java.util.ArrayList;

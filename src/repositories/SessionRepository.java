@@ -1,6 +1,6 @@
 package repositories;
 
-import data.SessionDataHandler;
+import data_handlers.SessionDataHandler;
 import domain.Session;
 
 import java.time.LocalDateTime;

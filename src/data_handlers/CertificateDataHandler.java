@@ -1,4 +1,4 @@
-package data;
+package data_handlers;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import domain.Certificate;
@@ -6,7 +6,7 @@ import domain.Certificate;
 import java.util.List;
 
 public class CertificateDataHandler {
-    private static final String FILE_PATH = "data/certificates.json";
+    private static final String FILE_PATH = "data_handlers/certificates.json";
     private static final DataHandler<Certificate> dataHandler = new DataHandler<>(FILE_PATH);
 
     public static List<Certificate> loadCertificates() {
