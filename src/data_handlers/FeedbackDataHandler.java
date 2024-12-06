@@ -10,8 +10,11 @@ public class FeedbackDataHandler {
     private static final DataHandler<Feedback> dataHandler = new DataHandler<>(FILE_PATH);
 
     public static List<Feedback> loadFeedback() {
-        return dataHandler.readData(new TypeReference<>() {}); // Pass TypeReference for List<Feedback>
+        List<Feedback> feedback = dataHandler.readData(new TypeReference<>() {});
+        System.out.println("Debug: Loaded feedback entries - " + feedback.size());
+        return feedback;
     }
+
 
     public static void saveFeedback(List<Feedback> feedbackList) {
         dataHandler.writeData(feedbackList);

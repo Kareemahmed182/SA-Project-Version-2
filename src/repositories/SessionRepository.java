@@ -16,10 +16,11 @@ public class SessionRepository {
     }
 
     public void addSession(String name, String speaker, LocalDateTime dateTime, String room) {
-        Session newSession = new Session(name, speaker, dateTime, room);
+        Session newSession = new Session(name, speaker, dateTime, room); // Uses the parameterized constructor
         sessions.add(newSession);
         saveSessions();
     }
+
 
     public void addAttendeeToSession(int sessionId, int attendeeId) {
         Session session = sessions.stream()

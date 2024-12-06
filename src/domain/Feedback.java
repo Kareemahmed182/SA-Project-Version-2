@@ -3,16 +3,20 @@ package domain;
 public class Feedback {
     private int attendeeId;
     private String comments;
-    private int rating; // 1 to 5
+    private int rating;
 
-    // Constructor
+    // Default constructor (required for Jackson)
+    public Feedback() {
+    }
+
+    // Parameterized constructor
     public Feedback(int attendeeId, String comments, int rating) {
         this.attendeeId = attendeeId;
         this.comments = comments;
         this.rating = rating;
     }
 
-    // Getters and Setters
+    // Getters and setters
     public int getAttendeeId() {
         return attendeeId;
     }
