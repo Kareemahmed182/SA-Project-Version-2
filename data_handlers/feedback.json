@@ -1,7 +1,9 @@
-[
-  {
-    "attendeeId": 1,
-    "comments": "Great session!",
-    "rating": 5
-  }
-]
+[ {
+  "attendeeId" : 1,
+  "comments" : "Great session!",
+  "rating" : 5
+}, {
+  "attendeeId" : 1,
+  "comments" : "hey",
+  "rating" : 3
+} ]

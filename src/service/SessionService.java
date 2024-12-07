@@ -3,7 +3,6 @@ package service;
 import dto.SessionDTO;
 import repositories.SessionRepository;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,8 +13,12 @@ public class SessionService {
         this.sessionRepository = sessionRepository;
     }
 
-    public List<SessionDTO> getAllSessions() {
-        return sessionRepository.getAllSessions().stream()
+    public void cancelSessionRegistration(int attendeeId, int sessionId) {
+        sessionRepository.removeAttendeeFromSession(sessionId, attendeeId);
+    }
+
+    public List<SessionDTO> getRegisteredSessionsForAttendee(int attendeeId) {
+        return sessionRepository.getSessionsForAttendee(attendeeId).stream()
                 .map(session -> new SessionDTO(
                         String.valueOf(session.getSessionId()),
                         session.getName(),
@@ -25,16 +28,8 @@ public class SessionService {
                 .collect(Collectors.toList());
     }
 
-    public void createSession(String name, String speaker, LocalDateTime dateTime, String room) {
-        sessionRepository.addSession(name, speaker, dateTime, room);
-    }
-
-    public void registerAttendeeForSession(int sessionId, int attendeeId) {
-        sessionRepository.addAttendeeToSession(sessionId, attendeeId);
-    }
-
-    public List<SessionDTO> getRegisteredSessionsForAttendee(int attendeeId) {
-        return sessionRepository.getSessionsForAttendee(attendeeId).stream()
+    public List<SessionDTO> getAllSessions() {
+        return sessionRepository.getAllSessions().stream()
                 .map(session -> new SessionDTO(
                         String.valueOf(session.getSessionId()),
                         session.getName(),

@@ -1,16 +1,20 @@
 package service;
 
-import repositories.AttendeeRepository;
+import repositories.CertificateRepository;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class CertificateService {
-    private final AttendeeRepository attendeeRepository;
+    private final CertificateRepository certificateRepository;
 
-    public CertificateService(AttendeeRepository attendeeRepository) {
-        this.attendeeRepository = attendeeRepository;
+    public CertificateService(CertificateRepository certificateRepository) {
+        this.certificateRepository = certificateRepository;
     }
 
-    public String generateCertificate(int attendeeId, String conferenceName) {
-        // Implement logic to fetch attendee and generate the certificate
-        return "Certificate for attendee " + attendeeId + " at " + conferenceName;
+    public List<String> getCertificatesForAttendee(int attendeeId) {
+        return certificateRepository.getCertificatesByAttendee(attendeeId).stream()
+                .map(certificate -> "Certificate for " + certificate.getConferenceName())
+                .collect(Collectors.toList());
     }
 }

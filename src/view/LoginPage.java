@@ -1,17 +1,11 @@
 package view;
 
 import controller.ConferenceManager;
-import domain.User;
 import dto.AttendeeDTO;
+import repositories.*;
+import service.*;
+import domain.User;
 import enums.Role;
-import repositories.UserRepository;
-import repositories.AttendeeRepository;
-import repositories.SessionRepository;
-import repositories.FeedbackRepository;
-import service.AttendeeService;
-import service.CertificateService;
-import service.FeedbackService;
-import service.SessionService;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,9 +16,11 @@ public class LoginPage extends JFrame {
     private final JTextField usernameField;
     private final JPasswordField passwordField;
     private final UserRepository userRepository;
+    private final AttendeeService attendeeService;
 
     public LoginPage() {
         userRepository = new UserRepository();
+        attendeeService = new AttendeeService(new AttendeeRepository());
 
         setTitle("Login Page");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -80,19 +76,21 @@ public class LoginPage extends JFrame {
         }
 
         private void openHomePage(User user) {
-            AttendeeService attendeeService = new AttendeeService(new AttendeeRepository());
             SessionService sessionService = new SessionService(new SessionRepository());
             FeedbackService feedbackService = new FeedbackService(new FeedbackRepository());
-            CertificateService certificateService = new CertificateService(new AttendeeRepository());
+            CertificateService certificateService = new CertificateService(new CertificateRepository());
 
-            ConferenceManager manager = new ConferenceManager(attendeeService, sessionService, feedbackService, certificateService);
+            ConferenceManager manager = new ConferenceManager(sessionService, feedbackService, certificateService);
 
             if (user.getRole() == Role.ADMIN) {
                 new AdminHomePage(manager);
             } else if (user.getRole() == Role.ATTENDEE) {
-                // Create AttendeeDTO for the logged-in user
-                AttendeeDTO attendeeDTO = new AttendeeDTO(1, user.getUsername(), "attendee@example.com");
-                new AttendeeHomePage(manager, attendeeDTO);
+                AttendeeDTO attendee = attendeeService.getAttendeeByUsername(user.getUsername());
+                if (attendee != null) {
+                    new AttendeeHomePage(manager, attendee);
+                } else {
+                    JOptionPane.showMessageDialog(LoginPage.this, "Attendee not found!", "Error", JOptionPane.ERROR_MESSAGE);
+                }
             } else if (user.getRole() == Role.SPEAKER) {
                 new SpeakerHomePage(manager);
             }
